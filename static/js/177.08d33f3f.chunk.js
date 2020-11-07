@@ -1,0 +1,2 @@
+(this.webpackJsonperodionov=this.webpackJsonperodionov||[]).push([[177],{209:function(n,e){var g;(g=Prism).languages.ignore={comment:/^#.*/m,entry:{pattern:/\S(?:.*(?:(?:\\ )|\S))?/,alias:"string",inside:{operator:/^!|\*\*?|\?/,regex:{pattern:/(^|[^\\])\[[^\[\]]*\]/,lookbehind:!0},punctuation:/\//}}},g.languages.gitignore=g.languages.ignore,g.languages.hgignore=g.languages.ignore,g.languages.npmignore=g.languages.ignore}}]);
+//# sourceMappingURL=177.08d33f3f.chunk.js.map

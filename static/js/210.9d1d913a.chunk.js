@@ -1,0 +1,2 @@
+(this.webpackJsonperodionov=this.webpackJsonperodionov||[]).push([[210],{242:function(n,o){Prism.languages.jsonp=Prism.languages.extend("json",{punctuation:/[{}[\]();,.]/}),Prism.languages.insertBefore("jsonp","punctuation",{function:/[_$a-zA-Z\xA0-\uFFFF][$\w\xA0-\uFFFF]*(?=\s*\()/})}}]);
+//# sourceMappingURL=210.9d1d913a.chunk.js.map

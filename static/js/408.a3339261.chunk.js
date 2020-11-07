@@ -1,0 +1,2 @@
+(this.webpackJsonperodionov=this.webpackJsonperodionov||[]).push([[408],{440:function(s,e){var i=Prism.util.clone(Prism.languages.typescript);Prism.languages.tsx=Prism.languages.extend("jsx",i)}}]);
+//# sourceMappingURL=408.a3339261.chunk.js.map

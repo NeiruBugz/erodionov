@@ -1,10 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;900&family=PT+Serif&display=swap');
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: 'PT Serif', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
+}
+
+.wmde-markdown {
+  font-family: 'PT Serif', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif !important;
 }
 
 code {
@@ -12,12 +21,40 @@ code {
     monospace;
 }
 
+button {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
 ol {
   padding: 0;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Montserrat', sans-serif;
+  color: inherit;
+}
+
+button > h1 {
+  color: #fdfdfd;
+  outline: none;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 8px;
+}
+
+button > h1:hover {
+  border-color: #fdfdfd;
+}
+
+p {
+  font-family: 'PT Serif', serif;
+  font-size: 1.2rem;
+}
+
 section {
   width: 100%;
+  height: max-content;
 }
 
 li {
@@ -27,6 +64,26 @@ li {
   cursor: pointer;
 }
 
+li > button {
+  padding: 4px;
+  border-bottom: 1px solid #000;
+  transition: 0.3 s all ease-in-out; 
+}
+
+li > button:hover {
+  background-color: #000;
+  color: #fdfdfd;
+  border-bottom: 1px solid #fdfdfd;
+}
+
 a {
   text-decoration: none;
+}
+
+article {
+  padding: 40px 120px;
+}
+
+img {
+  width: 800px;
 }

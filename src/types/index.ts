@@ -24,6 +24,6 @@ export type ArticleProps = {
 
 export type ListProps = {
   items: Lesson[];
-  title: string;
-  onClick: (name: string) => void; 
+  title?: string;
+  onClick: (name: string) => void;
 };

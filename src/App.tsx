@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import './App.css';
 
-import { get, getRawContent } from './api/api';
+import { Article, List, Menu } from './components';
 
-import { Article, List } from './components';
-
+import { get, getRawContent } from './api';
 import { Lesson, Content } from './types';
+
+import './App.css';
 
 const App = () => {
 
@@ -13,6 +13,8 @@ const App = () => {
   const [frontend, setFrontend] = useState<Lesson[]>([]);
   const [isActiveList, setActiveList] = useState(false);
   const [article, setArticle] = useState<Content>();
+  const [isFrontendOpen, setFrontendOpen] = useState(false);
+  const [isMarkupOpen, setMarkupOpen] = useState(false);
 
   useEffect(() => {
     const fetch = async () => {
@@ -44,14 +46,29 @@ const App = () => {
       title: name.slice(3, name.length - 3),
     };
     setArticle(c);
-    setActiveList(p => !p);
+    setActiveList(true);
+    setFrontendOpen(false);
+    setMarkupOpen(false);
+  };
+
+  const reset = () => {
+    setActiveList(false);
+    setMarkupOpen(false);
+    setFrontendOpen(false);
   };
 
   return (
     <>
       <section className="header">
-        {isActiveList && <button type="button" onClick={() => setActiveList(false)}>К меню</button>}
         <h1>Курсы Родионова</h1>
+        {isActiveList &&
+        <>
+          <button type="button" onClick={reset}>На главную</button>
+          <button type="button" onClick={() => setMarkupOpen(p => !p)}>Верстка</button>
+          <button type="button" onClick={() => setFrontendOpen(p => !p)}>Фронтенд</button>
+        </>}
+        {isMarkupOpen && <Menu><List items={markup} title="Верстка" onClick={onLinkClick} /></Menu>}
+        {isFrontendOpen && <Menu><List items={frontend} title="Фронтенд" onClick={onLinkClick} /></Menu>}
       </section>
       <div className="App">
         {markup && frontend && !isActiveList
@@ -60,13 +77,16 @@ const App = () => {
               <List items={markup} title="Верстка" onClick={onLinkClick} />
               <List items={frontend} title="Фронтенд" onClick={onLinkClick} />
             </>
-          : 
+          :
             <>
-              {article && <Article
-                body={article?.markdown}
-                title={article?.title}
-                sub={article?.subTitle}
-              />}
+              {article &&
+              <>
+                <Article
+                  body={article?.markdown}
+                  title={article?.title}
+                  sub={article?.subTitle}
+                />
+              </>}
             </>}
       </div>
     </>

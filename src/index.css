@@ -67,7 +67,9 @@ li {
 li > button {
   padding: 4px;
   border-bottom: 1px solid #000;
-  transition: 0.3 s all ease-in-out; 
+  transition: 0.3s all ease-in-out;
+  text-align: left;
+  width: 40ch;
 }
 
 li > button:hover {
@@ -80,8 +82,33 @@ a {
   text-decoration: none;
 }
 
-article {
-  padding: 40px 120px;
+.article {
+  width: 60%;
+  padding: 40px 0;
+}
+
+.sidemenu {
+  position: absolute;
+  width: 100%;
+  top: 119px;
+  z-index: 1;
+  background: #000;
+  padding: 20px;
+  color: #fdfdfd;
+}
+
+.sidemenu > section > ol {
+  display: flex;
+  flex-basis: 33%;
+  flex-wrap: wrap;
+}
+
+.sidemenu > section > ol > li {
+  margin: 0 16px;
+}
+
+.sidemenu > section > ol > li > button {
+  color: #fdfdfd;
 }
 
 img {

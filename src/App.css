@@ -1,23 +1,25 @@
 .App {
     width: 100%;
+    position: relative;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-around;
 }
 
 .header {
     display: flex;
-    justify-content: space-around;
-    align-items: center;
-    text-align: center;
-    height: 200px;
-    font-size: 48px;
+    justify-content: space-between;
+    font-size: 24px;
     font-family: serif;
     background-color: #000;
     color: #fdfdfd;
 }
 
+.header > h1 {
+    margin-left: 20px;
+}
+
 .header > button {
+    margin: 0 20px;
     font-family: 'Montserrat', sans-serif;
     color: #fdfdfd;
     outline: none;

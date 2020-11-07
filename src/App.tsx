@@ -1,70 +1,76 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 
-import {get, getRawContent} from './api/api';
+import { get, getRawContent } from './api/api';
 
-import {Article, List} from './components';
+import { Article, List } from './components';
 
-import {Content, Lesson} from "./types";
+import { Lesson, Content } from './types';
 
-function App() {
+const App = () => {
 
-	const [markup, setMarkup] = useState<Lesson[]>([]);
-	const [frontend, setFrontend] = useState<Lesson[]>([]);
-	const [isActiveList, setActiveList] = useState(false);
-	const [content, setContent] = useState<Content>();
+  const [markup, setMarkup] = useState<Lesson[]>([]);
+  const [frontend, setFrontend] = useState<Lesson[]>([]);
+  const [isActiveList, setActiveList] = useState(false);
+  const [article, setArticle] = useState<Content>();
 
-	useEffect(() => {
-		const fetch = async () => {
-			const r = await get('verstka');
-			setMarkup(r.slice(0, r.length - 1));
-		};
+  useEffect(() => {
+    const fetch = async () => {
+      const r = await get('verstka');
+      setMarkup(r.slice(0, r.length - 1));
+    };
 
-		fetch();
-	}, []);
+    fetch();
+  }, []);
 
-	useEffect(() => {
-		const fetch = async () => {
-			const r = await get('react');
-			setFrontend(r.slice(0, r.length - 1));
-		};
+  useEffect(() => {
+    const fetch = async () => {
+      const r = await get('react');
+      setFrontend(r.slice(0, r.length - 1));
+    };
 
-		fetch();
-	}, []);
+    fetch();
+  }, []);
 
-	const decode = (str: string) => {
-		return decodeURIComponent(atob(str).split('').map(c => `%${('00' + c.charCodeAt(0).toString(16)).slice(-2)}`).join(''));
-	}
+  const decode = (str: string) => {
+    return decodeURIComponent(atob(str).split('').map(c => `%${(`00${  c.charCodeAt(0).toString(16)}`).slice(-2)}`).join(''));
+  };
 
-	const onLinkClick = async (name: string) => {
-		console.log(name);
-		const c = await getRawContent('verstka', name);
-		setContent(JSON.parse(decode(c.content)));
-		setActiveList(p => !p);
-	};
+  const onLinkClick = async (url: string) => {
+    const { name, content } = await getRawContent(url);
+    const decoded = decode(content);
+    const c: Content = {
+      markdown: decoded,
+      title: name.slice(3, name.length - 3),
+    };
+    setArticle(c);
+    setActiveList(p => !p);
+  };
 
-	return (
-		<>
-			<section className="header">
-				<h1>Курсы Родионова</h1>
-			</section>
-			<div className="App">
-				{markup.length !== 0
-				&& frontend.length !== 0
-				&&
-        <>
-					{!isActiveList ?
-						<>
-							<List items={markup} title="Верстка" onClick={onLinkClick}/>
-							<List items={frontend} title="Фронтенд" onClick={onLinkClick}/>
-						</>
-						: <>{content !== undefined &&
-            <Article title={content.title} sub={content.subTitle} body={content.markdown}/>}</>
-					}
-        </>}
-			</div>
-		</>
-	);
-}
+  return (
+    <>
+      <section className="header">
+        {isActiveList && <button type="button" onClick={() => setActiveList(false)}>К меню</button>}
+        <h1>Курсы Родионова</h1>
+      </section>
+      <div className="App">
+        {markup && frontend && !isActiveList
+          ?
+            <>
+              <List items={markup} title="Верстка" onClick={onLinkClick} />
+              <List items={frontend} title="Фронтенд" onClick={onLinkClick} />
+            </>
+          : 
+            <>
+              {article && <Article
+                body={article?.markdown}
+                title={article?.title}
+                sub={article?.subTitle}
+              />}
+            </>}
+      </div>
+    </>
+  );
+};
 
-export default App;
+export  { App };

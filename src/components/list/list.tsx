@@ -1,16 +1,20 @@
 import React from 'react';
-import {Lesson} from "../../types";
+import { ListProps } from '../../types';
 
-const List = ({items, title, onClick}: { items: Lesson[], title: string, onClick: (name: string) => void }) => {
-	return (
-		<section>
-			<h3>{title}</h3>
-			<ol>
-				{items.map(({sha, name, html_url, git_url}) =>
-					<li key={sha} onClick={() => onClick(name)}>{name.slice(3, name.length - 3)}</li>)}
-			</ol>
-		</section>
-	)
+const List = ({ items, title, onClick }: ListProps) => {
+  return (
+    <section>
+      <h3>{title}</h3>
+      <ol>
+        {items.map(({ sha, name, url }) =>
+          <li
+            key={sha}
+          >
+            <button type="button" onClick={() => onClick(url)}>{name.slice(3, name.length - 3)}</button>
+          </li>)}
+      </ol>
+    </section>
+  );
 };
 
 export { List };

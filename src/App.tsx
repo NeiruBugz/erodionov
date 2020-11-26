@@ -1,13 +1,13 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 
-import {get, getRawContent} from './api/api';
+import { get, getRawContent } from './api/api';
 
-import {Article, List} from './components';
+import { Article, List } from './components';
 
-import {Content, Lesson} from "./types";
+import { Content, Lesson } from "./types";
 
-function App() {
+const App = () => {
 
 	const [markup, setMarkup] = useState<Lesson[]>([]);
 	const [frontend, setFrontend] = useState<Lesson[]>([]);
@@ -37,7 +37,6 @@ function App() {
 	}
 
 	const onLinkClick = async (name: string) => {
-		console.log(name);
 		const c = await getRawContent('verstka', name);
 		setContent(JSON.parse(decode(c.content)));
 		setActiveList(p => !p);
@@ -48,7 +47,7 @@ function App() {
 			<section className="header">
 				<h1>Курсы Родионова</h1>
 			</section>
-			<div className="App">
+			<div className="app">
 				{markup.length !== 0
 				&& frontend.length !== 0
 				&&
@@ -67,4 +66,4 @@ function App() {
 	);
 }
 
-export default App;
+export { App };
